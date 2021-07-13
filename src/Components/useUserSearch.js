@@ -1,11 +1,10 @@
 import {useEffect,useState} from "react";
-import axios from "axios";
 import { Octokit } from "@octokit/core";
 
 
 const useUserSearch = (query,pageNumber)=>{
 
-  useEffect(()=>{
+  useEffect(async()=>{
     const octokit = new Octokit({ auth: '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' });
       const response = await octokit.request('GET /search/users', {
       q: query,
@@ -23,8 +22,11 @@ const useUserSearch = (query,pageNumber)=>{
           arrOfNameImageObjects.push(objNameImage);
         }
       }))
+      console.log("resukt",arrOfNameImageObjects);
     // this.setState({results:arrOfNameImageObjects})
   },[query,pageNumber]
   )
   return null;
 }
+
+export default useUserSearch;
